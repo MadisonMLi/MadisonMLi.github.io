@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Madison Mai — Data Scientist & ML Engineer portfolio"/>
+  <title>Madison Mai | Data Scientist</title>
+
+  <!-- Materialize CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --blue-dark:  #1565C0;
+      --blue-mid:   #5BA4CF;
+      --blue-light: #AED6F1;
+      --blue-bg:    #F0F8FF;
+      --text-dark:  #1A1A2E;
+      --text-mid:   #4A4A6A;
+    }
+
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: var(--text-dark); background: #fff; }
+
+    /* ── SIDEBAR ── */
+    .side-nav {
+      background: linear-gradient(180deg, var(--blue-dark) 0%, var(--blue-mid) 100%);
+      width: 240px;
+    }
+    .side-nav li a { color: #fff !important; font-weight: 500; letter-spacing: 0.4px; }
+    .side-nav li a:hover { background: rgba(255,255,255,0.15) !important; }
+    .side-nav .profile-img {
+      width: 100px; height: 100px; border-radius: 50%;
+      border: 3px solid rgba(255,255,255,0.7);
+      margin: 28px auto 8px; display: block; object-fit: cover;
+    }
+    .side-nav .profile-name {
+      color: #fff; text-align: center; font-weight: 600;
+      font-size: 0.88rem; padding-bottom: 16px;
+    }
+    .side-nav .divider { background-color: rgba(255,255,255,0.2) !important; }
+
+    /* ── TOP NAV ── */
+    nav {
+      background: linear-gradient(90deg, var(--blue-dark) 0%, var(--blue-mid) 100%);
+      box-shadow: 0 2px 8px rgba(21,101,192,0.25);
+    }
+
+    /* ── HERO ── */
+    #intro {
+      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-mid) 60%, var(--blue-light) 100%);
+      min-height: 100vh; display: flex; align-items: center;
+      justify-content: center; text-align: center; padding: 80px 24px;
+    }
+    .hero-avatar {
+      width: 160px; height: 160px; border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.8); object-fit: cover;
+      margin: 0 auto 24px; display: block;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+    #intro h1 { color: #fff; font-size: 2.8rem; font-weight: 700; margin: 0 0 8px; }
+    #intro h4 { color: rgba(255,255,255,0.92); font-weight: 300; margin: 0 0 20px; min-height: 2rem; }
+    #intro .tagline {
+      color: rgba(255,255,255,0.85); max-width: 640px;
+      margin: 0 auto 32px; font-size: 1.05rem; line-height: 1.75;
+    }
+    .hero-social { margin-bottom: 28px; }
+    .hero-social a {
+      color: rgba(255,255,255,0.85); font-size: 1.9rem; margin: 0 12px;
+      display: inline-block; transition: color 0.2s, transform 0.2s;
+    }
+    .hero-social a:hover { color: #fff; transform: translateY(-3px); }
+    .btn-hero {
+      background: #fff !important; color: var(--blue-dark) !important;
+      border-radius: 24px; padding: 0 28px; height: 42px; line-height: 42px;
+      font-weight: 600; margin: 6px; display: inline-block; text-align: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15); transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-hero:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+
+    /* ── SECTIONS ── */
+    .section { padding: 70px 0; }
+    .section-alt { background: var(--blue-bg); }
+    .section-title {
+      text-align: center; font-size: 2rem; font-weight: 700;
+      color: var(--blue-dark); margin-bottom: 10px;
+    }
+    .section-divider {
+      width: 60px; height: 4px; background: var(--blue-mid);
+      border-radius: 2px; margin: 0 auto 44px;
+    }
+
+    /* ── ABOUT ── */
+    .about-img {
+      width: 200px; height: 200px; border-radius: 50%; object-fit: cover;
+      border: 4px solid var(--blue-light); display: block; margin: 0 auto 20px;
+      box-shadow: 0 4px 20px rgba(91,164,207,0.3);
+    }
+    #about p { color: var(--text-mid); font-size: 1.02rem; line-height: 1.85; }
+    #about .highlight { color: var(--blue-dark); font-weight: 600; }
+    #about a { color: var(--blue-mid); }
+
+    /* ── TIMELINE ── */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
+      width: 2px; background: var(--blue-light);
+    }
+    .timeline-item { position: relative; margin-bottom: 36px; }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -26px; top: 8px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--blue-mid); border: 2px solid #fff;
+      box-shadow: 0 0 0 2px var(--blue-mid);
+    }
+    .timeline-card {
+      background: #fff; border-radius: 12px; padding: 20px 24px;
+      box-shadow: 0 2px 14px rgba(91,164,207,0.13);
+      border-left: 4px solid var(--blue-mid);
+    }
+    .timeline-card h5 { color: var(--blue-dark); font-weight: 700; margin: 0 0 4px; font-size: 1.05rem; }
+    .timeline-card .org { color: var(--blue-mid); font-weight: 600; font-size: 0.95rem; }
+    .timeline-card .date { color: #888; font-size: 0.83rem; margin-bottom: 10px; }
+    .timeline-card p, .timeline-card li { color: var(--text-mid); font-size: 0.94rem; line-height: 1.75; }
+    .timeline-card ul { padding-left: 20px; margin: 0; list-style-type: disc; }
+    .timeline-card ul li { list-style-type: disc !important; }
+
+    /* ── PROJECT CARDS ── */
+    .project-card {
+      background: #fff; border-radius: 14px; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(91,164,207,0.12);
+      transition: transform 0.25s, box-shadow 0.25s;
+      display: flex; flex-direction: column; height: 100%;
+    }
+    .project-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(91,164,207,0.24); }
+    .project-card-header {
+      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-mid) 100%);
+      padding: 18px 20px 14px;
+    }
+    .project-card-header h5 { color: #fff; font-weight: 700; margin: 0 0 8px; font-size: 0.97rem; }
+    .p-tag {
+      display: inline-block; background: rgba(255,255,255,0.22); color: #fff;
+      border-radius: 12px; padding: 2px 10px; font-size: 0.73rem; margin: 2px;
+    }
+    .project-card-body { padding: 16px 20px; flex: 1; }
+    .project-card-body p { color: var(--text-mid); font-size: 0.9rem; line-height: 1.72; margin: 0; }
+    .project-card-footer { padding: 12px 20px; border-top: 1px solid var(--blue-bg); }
+    .project-card-footer a { color: var(--blue-dark); font-weight: 600; font-size: 0.88rem; text-decoration: none; }
+    .project-card-footer a:hover { color: var(--blue-mid); }
+
+    /* ── SKILL CARDS ── */
+    .skill-card {
+      background: #fff; border-radius: 12px; padding: 22px 20px;
+      box-shadow: 0 2px 12px rgba(91,164,207,0.12);
+      border-left: 4px solid var(--blue-mid); margin-bottom: 20px;
+    }
+    .skill-card h5 { color: var(--blue-dark); font-weight: 700; font-size: 0.93rem; margin: 0 0 12px; }
+    .s-tag {
+      display: inline-block; background: var(--blue-bg); color: var(--blue-dark);
+      border: 1px solid var(--blue-light); border-radius: 20px;
+      padding: 4px 13px; font-size: 0.82rem; font-weight: 500; margin: 3px;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-card {
+      background: #fff; border-radius: 12px; padding: 22px 26px;
+      box-shadow: 0 2px 12px rgba(91,164,207,0.12);
+      border-left: 4px solid var(--blue-mid); margin-bottom: 22px;
+    }
+    .edu-card h5 { color: var(--blue-dark); font-weight: 700; margin: 0 0 4px; }
+    .edu-card .school { color: var(--blue-mid); font-weight: 600; margin-bottom: 3px; }
+    .edu-card .date { color: #888; font-size: 0.83rem; margin-bottom: 10px; }
+    .edu-card p { color: var(--text-mid); font-size: 0.93rem; line-height: 1.7; margin: 0; }
+
+    /* ── CONTACT ── */
+    #contact { background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-mid) 100%); }
+    #contact .section-title { color: #fff; }
+    .divider-light {
+      width: 60px; height: 4px; background: rgba(255,255,255,0.55);
+      border-radius: 2px; margin: 0 auto 44px;
+    }
+    .contact-item { text-align: center; color: #fff; margin-bottom: 24px; }
+    .contact-item i { font-size: 2rem; display: block; margin-bottom: 8px; opacity: 0.9; }
+    .contact-item a { color: rgba(255,255,255,0.9); text-decoration: none; font-size: 1rem; font-weight: 500; }
+    .contact-item a:hover { color: #fff; text-decoration: underline; }
+    .contact-item span { font-size: 1rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111827; color: rgba(255,255,255,0.45);
+      text-align: center; padding: 18px; font-size: 0.83rem;
+    }
+    footer span { color: var(--blue-mid); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 992px) {
+      .main-content { margin-left: 0 !important; }
+      footer { margin-left: 0 !important; }
+      #intro h1 { font-size: 2rem; }
+    }
+
+    /* ── PROJECT VISUALS ── */
+    .proj-visual {
+      height: 165px; background: #F4F9FF;
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; padding: 14px 18px; overflow: hidden; position: relative;
+    }
+    .pv-col { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+    .pv-label { font-size: 0.65rem; color: var(--text-mid); font-weight: 600; text-align: center; line-height: 1.4; }
+    .pv-icon { font-size: 1.9rem; color: var(--blue-dark); display: block; }
+    .pv-icon-lg { font-size: 2.6rem; color: var(--blue-dark); display: block; }
+    .pv-arrow-icon { color: var(--blue-light); font-size: 1.3rem; }
+    .pv-bar-wrap { display: flex; align-items: flex-end; gap: 4px; height: 50px; }
+    .pv-bar { width: 10px; border-radius: 3px 3px 0 0; transform: scaleY(0); transform-origin: bottom; background: var(--blue-mid); animation: pv-bar-rise 0.7s ease forwards; }
+    .pv-ring { position: absolute; inset: -14px; border-radius: 50%; border: 2px solid var(--blue-mid); opacity: 0; animation: pv-pulse-ring 2.4s ease-out infinite; pointer-events: none; }
+    .pv-stage { display: flex; flex-direction: column; align-items: center; background: #fff; border: 1.5px solid var(--blue-light); border-radius: 8px; padding: 6px 7px; gap: 3px; animation: pv-slide-up 0.4s ease both; }
+    .pv-stage i { font-size: 1rem; color: var(--blue-dark); }
+    .pv-stage span { font-size: 0.6rem; color: var(--text-mid); font-weight: 600; white-space: nowrap; }
+
+    @keyframes pv-float      { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+    @keyframes pv-pulse-ring { 0%{transform:scale(0.8);opacity:0.8} 100%{transform:scale(1.8);opacity:0} }
+    @keyframes pv-bar-rise   { to{transform:scaleY(1)} }
+    @keyframes pv-spin-slow  { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    @keyframes pv-bounce     { 0%,100%{transform:translateY(0)} 40%{transform:translateY(-13px)} 60%{transform:translateY(-5px)} }
+    @keyframes pv-blink      { 0%,100%{opacity:1} 50%{opacity:0.15} }
+    @keyframes pv-draw       { to{stroke-dashoffset:0} }
+    @keyframes pv-fade       { from{opacity:0} to{opacity:1} }
+    @keyframes pv-slide-up   { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes pv-slide-l    { from{opacity:0;transform:translateX(-18px)} to{opacity:1;transform:translateX(0)} }
+    @keyframes pv-slide-r    { from{opacity:0;transform:translateX(18px)} to{opacity:1;transform:translateX(0)} }
+  </style>
+</head>
+<body>
+
+<!-- ── FIXED SIDE NAV (desktop) ── -->
+<ul id="slide-out" class="side-nav fixed hide-on-med-and-down">
+  <li>
+    <img src="https://avatars.githubusercontent.com/u/99107884?v=4" alt="Madison Mai" class="profile-img"/>
+    <p class="profile-name">Madison Mai</p>
+  </li>
+  <li class="divider"></li>
+  <li><a href="#intro">    <i class="fa fa-home fa-fw"></i>&nbsp; Home</a></li>
+  <li><a href="#about">   <i class="fa fa-user fa-fw"></i>&nbsp; About</a></li>
+  <li><a href="#experience"><i class="fa fa-briefcase fa-fw"></i>&nbsp; Experience</a></li>
+  <li><a href="#projects"> <i class="fa fa-code fa-fw"></i>&nbsp; Projects</a></li>
+  <li><a href="#skills">   <i class="fa fa-cogs fa-fw"></i>&nbsp; Skills</a></li>
+  <li><a href="#education"><i class="fa fa-graduation-cap fa-fw"></i>&nbsp; Education</a></li>
+  <li><a href="#contact">  <i class="fa fa-envelope fa-fw"></i>&nbsp; Contact</a></li>
+  <li class="divider"></li>
+  <li><a href="https://github.com/MadisonMLi" target="_blank"><i class="fa fa-github fa-fw"></i>&nbsp; GitHub</a></li>
+</ul>
+
+<!-- ── MOBILE TOP NAV ── -->
+<nav class="hide-on-large-only">
+  <div class="nav-wrapper container">
+    <a href="#" class="brand-logo" style="font-size:1.05rem;font-weight:700;">Madison Mai</a>
+    <a href="#" data-activates="mobile-nav" class="button-collapse right">
+      <i class="fa fa-bars" style="font-size:1.4rem;color:#fff;line-height:64px;"></i>
+    </a>
+  </div>
+</nav>
+<ul class="side-nav" id="mobile-nav">
+  <li><a href="#intro">Home</a></li>
+  <li><a href="#about">About</a></li>
+  <li><a href="#experience">Experience</a></li>
+  <li><a href="#projects">Projects</a></li>
+  <li><a href="#skills">Skills</a></li>
+  <li><a href="#education">Education</a></li>
+  <li><a href="#contact">Contact</a></li>
+</ul>
+
+<!-- ══════════════════════════════
+     MAIN CONTENT
+══════════════════════════════ -->
+<main class="main-content" style="margin-left:240px;">
+
+  <!-- ── HERO ── -->
+  <section id="intro">
+    <div class="container">
+      <img src="https://avatars.githubusercontent.com/u/99107884?v=4" alt="Madison Mai" class="hero-avatar"/>
+      <h1>Madison Mai</h1>
+      <h4><span id="typed"></span></h4>
+      <p class="tagline">
+        I turn messy data into smart systems. Ex-finance analyst, now building AI tools that actually ship!
+      </p>
+      <div class="hero-social">
+        <a href="https://github.com/MadisonMLi" target="_blank" title="GitHub"><i class="fa fa-github"></i></a>
+        <a href="mailto:mengyao.li.oh@gmail.com" title="Email"><i class="fa fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/madison-mai/" target="_blank" title="LinkedIn"><i class="fa fa-linkedin-square"></i></a>
+      </div>
+      <a href="#about" class="btn btn-hero waves-effect waves-light">Read More</a>
+      <a href="#contact" class="btn btn-hero waves-effect waves-light">Contact Me</a>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="section-divider"></div>
+      <div class="row" style="align-items:center;">
+        <div class="col s12 m3 center-align">
+          <img src="https://avatars.githubusercontent.com/u/99107884?v=4" alt="Madison Mai" class="about-img"/>
+        </div>
+        <div class="col s12 m9">
+          <p>
+            I'm a <span class="highlight">Data Scientist &amp; ML Engineer</span> based in Watertown, MA,
+            with 5+ years of experience as a Senior Financial Analyst and graduate degrees in
+            Financial Mathematics and Computer Engineering (Human-Robot Interaction) from Tufts University.
+          </p>
+          <p>
+            My career sits at the intersection of
+            <span class="highlight">quantitative finance and AI engineering</span>. At the University
+            of Minnesota School of Medicine I managed $3B+ research portfolios and led the deployment
+            of enterprise Tableau/SQL reporting dashboards that reduced reporting time by 10% and raised
+            data accuracy to 99%. I bring that same rigour to building GenAI systems — RAG pipelines,
+            agentic LLM tools, fraud detection models, and options pricing APIs.
+          </p>
+          <p>
+            I'm fluent in the full ML stack: data ingestion, feature engineering, model training,
+            evaluation, and production deployment with CI/CD. I thrive at translating complex
+            analytical problems into clear, scalable technical solutions.
+          </p>
+          <p style="margin-top:20px;">
+            <i class="fa fa-map-marker" style="color:var(--blue-mid);"></i>&nbsp; Watertown, MA &ensp;
+            <i class="fa fa-phone" style="color:var(--blue-mid);"></i>&nbsp; 612-422-8529 &ensp;
+            <i class="fa fa-envelope" style="color:var(--blue-mid);"></i>&nbsp;
+            <a href="mailto:mengyao.li.oh@gmail.com">mengyao.li.oh@gmail.com</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── EXPERIENCE ── -->
+  <section id="experience" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Work Experience</h2>
+      <div class="section-divider"></div>
+      <div class="timeline">
+
+        <!-- UMN SOM -->
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <h5>Senior Financial Analyst</h5>
+            <p class="org">University of Minnesota – School of Medicine</p>
+            <p class="date"><i class="fa fa-calendar"></i>&nbsp; Dec 2019 – Mar 2025 &nbsp;·&nbsp; Minneapolis, MN</p>
+            <ul>
+              <li>Managed <strong>$3B+</strong> portfolio using financial modeling and forecasting to drive scalable budgeting decisions.</li>
+              <li>Built reporting pipelines for budget-to-actual analysis, ensuring compliance across grant-funded projects.</li>
+              <li>Developed dashboards with SQL, ETL &amp; Tableau — reduced reporting time by <strong>10%</strong> and improved accuracy to <strong>99%</strong>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Boston Scientific -->
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <h5>Financial Analyst</h5>
+            <p class="org">Boston Scientific Corporation</p>
+            <p class="date"><i class="fa fa-calendar"></i>&nbsp; Feb 2019 – Dec 2019 &nbsp;·&nbsp; Arden Hills, MN</p>
+            <ul>
+              <li>Ensured compliance for <strong>$2B+</strong> contracts by analyzing federal regulations and financial policies.</li>
+              <li>Automated pipelines using PostgreSQL &amp; Python, saving time and identifying <strong>$5M</strong> in revenue opportunities.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Deloitte -->
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <h5>Data Analyst Intern</h5>
+            <p class="org">Deloitte China</p>
+            <p class="date"><i class="fa fa-calendar"></i>&nbsp; May 2018 – Aug 2018 &nbsp;·&nbsp; Chongqing, China</p>
+            <ul>
+              <li>Built data pipelines in PostgreSQL to integrate and analyze multi-source enterprise data.</li>
+              <li>Created Tableau dashboards to monitor system performance and support real-time decisions.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROJECTS ── -->
+  <section id="projects" class="section">
+    <div class="container">
+      <h2 class="section-title">Projects</h2>
+      <div class="section-divider"></div>
+      <div class="row">
+
+        <!-- 1 – Financial Research Copilot -->
+        <div class="col s12 m6 l4" style="margin-bottom:24px;">
+          <div class="project-card">
+            <div class="project-card-header">
+              <h5>AI Financial Research Copilot</h5>
+              <span class="p-tag">Claude API</span>
+              <span class="p-tag">LangChain</span>
+              <span class="p-tag">FAISS</span>
+              <span class="p-tag">Streamlit</span>
+            </div>
+            <div class="project-card-body" style="padding:0">
+              <div class="proj-visual">
+                <!-- Documents -->
+                <div class="pv-col" style="animation:pv-slide-l 0.5s ease 0.1s both">
+                  <i class="fa fa-file-text-o pv-icon" style="color:var(--blue-light)"></i>
+                  <i class="fa fa-database" style="font-size:1.1rem;color:var(--blue-light)"></i>
+                  <div class="pv-label">SEC / XBRL</div>
+                </div>
+                <i class="fa fa-long-arrow-right pv-arrow-icon"></i>
+                <!-- AI center -->
+                <div class="pv-col" style="position:relative">
+                  <div class="pv-ring"></div>
+                  <i class="fa fa-connectdevelop pv-icon-lg" style="animation:pv-float 3s ease-in-out infinite;position:relative;z-index:1"></i>
+                  <div class="pv-label" style="color:var(--blue-dark);font-weight:700">Claude AI</div>
+                </div>
+                <i class="fa fa-long-arrow-right pv-arrow-icon"></i>
+                <!-- Bar chart -->
+                <div class="pv-col" style="animation:pv-slide-r 0.5s ease 0.2s both">
+                  <div class="pv-bar-wrap">
+                    <div class="pv-bar" style="height:55%;animation-delay:0.3s"></div>
+                    <div class="pv-bar" style="height:90%;animation-delay:0.5s;background:var(--blue-dark)"></div>
+                    <div class="pv-bar" style="height:70%;animation-delay:0.7s"></div>
+                    <div class="pv-bar" style="height:80%;animation-delay:0.9s;background:var(--blue-dark)"></div>
+                  </div>
+                  <div class="pv-label">Insights</div>
+                </div>
+              </div>
+            </div>
+            <div class="project-card-footer">
+              <a href="https://github.com/MadisonMLi" target="_blank">
+                <i class="fa fa-github"></i>&nbsp; View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 – Airbnb -->
+        <div class="col s12 m6 l4" style="margin-bottom:24px;">
+          <div class="project-card">
+            <div class="project-card-header">
+              <h5>Boston Airbnb Market Dashboard</h5>
+              <span class="p-tag">Plotly Dash</span>
+              <span class="p-tag">Pandas</span>
+              <span class="p-tag">Render</span>
+            </div>
+            <div class="project-card-body" style="padding:0">
+              <div class="proj-visual" style="flex-direction:column;gap:10px">
+                <!-- Map pins + homes -->
+                <div style="display:flex;gap:22px;align-items:flex-end">
+                  <div style="text-align:center">
+                    <i class="fa fa-map-marker" style="font-size:1.5rem;color:var(--blue-dark);animation:pv-bounce 2.2s ease-in-out infinite 0s"></i>
+                    <i class="fa fa-home" style="font-size:0.9rem;color:var(--blue-mid);display:block;margin-top:-2px"></i>
+                  </div>
+                  <div style="text-align:center">
+                    <i class="fa fa-map-marker" style="font-size:2rem;color:var(--blue-mid);animation:pv-bounce 2.2s ease-in-out infinite 0.35s"></i>
+                    <i class="fa fa-home" style="font-size:1.2rem;color:var(--blue-dark);display:block;margin-top:-2px"></i>
+                  </div>
+                  <div style="text-align:center">
+                    <i class="fa fa-map-marker" style="font-size:1.3rem;color:var(--blue-light);animation:pv-bounce 2.2s ease-in-out infinite 0.7s"></i>
+                    <i class="fa fa-home" style="font-size:0.8rem;color:var(--blue-mid);display:block;margin-top:-2px"></i>
+                  </div>
+                </div>
+                <!-- Animated bars -->
+                <div class="pv-bar-wrap" style="height:38px;gap:5px">
+                  <div class="pv-bar" style="height:55%;width:12px;animation-delay:0.2s"></div>
+                  <div class="pv-bar" style="height:100%;width:12px;animation-delay:0.4s;background:var(--blue-dark)"></div>
+                  <div class="pv-bar" style="height:45%;width:12px;animation-delay:0.6s"></div>
+                  <div class="pv-bar" style="height:80%;width:12px;animation-delay:0.8s;background:var(--blue-dark)"></div>
+                  <div class="pv-bar" style="height:65%;width:12px;animation-delay:1.0s"></div>
+                  <div class="pv-bar" style="height:90%;width:12px;animation-delay:1.2s;background:var(--blue-dark)"></div>
+                </div>
+                <div class="pv-label">25 Neighbourhoods · 1.8M+ rows</div>
+              </div>
+            </div>
+            <div class="project-card-footer">
+              <a href="https://github.com/MadisonMLi" target="_blank">
+                <i class="fa fa-github"></i>&nbsp; View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 – Fraud Detection -->
+        <div class="col s12 m6 l4" style="margin-bottom:24px;">
+          <div class="project-card">
+            <div class="project-card-header">
+              <h5>Fraud Detection Model</h5>
+              <span class="p-tag">LightGBM</span>
+              <span class="p-tag">XGBoost</span>
+              <span class="p-tag">Random Forest</span>
+            </div>
+            <div class="project-card-body" style="padding:0">
+              <div class="proj-visual" style="flex-direction:column;gap:12px">
+                <!-- Transaction stream → shield -->
+                <div style="display:flex;align-items:center;gap:7px">
+                  <i class="fa fa-circle" style="font-size:0.65rem;color:var(--blue-mid);animation:pv-fade 0.8s ease-in-out infinite alternate 0s"></i>
+                  <i class="fa fa-circle" style="font-size:0.65rem;color:var(--blue-mid);animation:pv-fade 0.8s ease-in-out infinite alternate 0.2s"></i>
+                  <i class="fa fa-circle" style="font-size:0.65rem;color:#e74c3c;animation:pv-blink 1s ease-in-out infinite 0.4s"></i>
+                  <i class="fa fa-long-arrow-right" style="color:var(--blue-light);font-size:1rem"></i>
+                  <div style="position:relative">
+                    <div class="pv-ring" style="animation-duration:2s"></div>
+                    <i class="fa fa-shield" style="font-size:2.4rem;color:var(--blue-dark);position:relative;z-index:1;animation:pv-float 2.5s ease-in-out infinite"></i>
+                  </div>
+                  <i class="fa fa-long-arrow-right" style="color:var(--blue-light);font-size:1rem"></i>
+                  <i class="fa fa-circle" style="font-size:0.65rem;color:var(--blue-mid);animation:pv-fade 0.8s ease-in-out infinite alternate 0.6s"></i>
+                  <i class="fa fa-circle" style="font-size:0.65rem;color:var(--blue-mid);animation:pv-fade 0.8s ease-in-out infinite alternate 0.8s"></i>
+                </div>
+                <!-- Results -->
+                <div style="display:flex;gap:28px">
+                  <div style="text-align:center">
+                    <i class="fa fa-check-circle" style="font-size:1.7rem;color:#27ae60"></i>
+                    <div class="pv-label">Legit</div>
+                  </div>
+                  <div style="text-align:center">
+                    <i class="fa fa-times-circle" style="font-size:1.7rem;color:#e74c3c;animation:pv-blink 1.4s ease-in-out infinite"></i>
+                    <div class="pv-label">Fraud</div>
+                  </div>
+                </div>
+                <div class="pv-label">3.1M transactions · 100% Recall · 99.4% Precision</div>
+              </div>
+            </div>
+            <div class="project-card-footer">
+              <a href="https://github.com/MadisonMLi" target="_blank">
+                <i class="fa fa-github"></i>&nbsp; View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 – Option Pricing -->
+        <div class="col s12 m6 l4" style="margin-bottom:24px;">
+          <div class="project-card">
+            <div class="project-card-header">
+              <h5>Option Pricing Application</h5>
+              <span class="p-tag">C#</span>
+              <span class="p-tag">ASP.NET</span>
+              <span class="p-tag">Monte Carlo</span>
+              <span class="p-tag">RESTful API</span>
+            </div>
+            <div class="project-card-body" style="padding:0">
+              <div class="proj-visual" style="gap:16px">
+                <!-- Option payoff curve SVG -->
+                <div class="pv-col">
+                  <svg viewBox="0 0 130 80" width="130" height="80">
+                    <line x1="8" y1="72" x2="122" y2="72" stroke="#AED6F1" stroke-width="1.5"/>
+                    <line x1="8" y1="72" x2="8" y2="10" stroke="#AED6F1" stroke-width="1.5"/>
+                    <path d="M 14 65 L 68 65 L 118 12"
+                          stroke="var(--blue-dark)" stroke-width="2.5" fill="none" stroke-linecap="round"
+                          stroke-dasharray="220" stroke-dashoffset="220"
+                          style="animation:pv-draw 1.4s ease 0.3s forwards"/>
+                    <line x1="68" y1="18" x2="68" y2="72" stroke="var(--blue-mid)" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.7"/>
+                    <text x="64" y="14" font-size="9" fill="var(--blue-mid)" style="animation:pv-fade 0.4s ease 1.6s both;opacity:0">K</text>
+                    <text x="90" y="30" font-size="8" fill="var(--blue-dark)" style="animation:pv-fade 0.4s ease 1.8s both;opacity:0">Profit ↑</text>
+                  </svg>
+                  <!-- Greeks -->
+                  <div style="display:flex;gap:10px;margin-top:2px">
+                    <span style="font-size:1rem;color:var(--blue-dark);font-weight:700;animation:pv-fade 0.4s ease 1.0s both;opacity:0">Δ</span>
+                    <span style="font-size:1rem;color:var(--blue-mid);font-weight:700;animation:pv-fade 0.4s ease 1.2s both;opacity:0">Γ</span>
+                    <span style="font-size:1rem;color:var(--blue-dark);font-weight:700;animation:pv-fade 0.4s ease 1.4s both;opacity:0">Θ</span>
+                    <span style="font-size:1rem;color:var(--blue-mid);font-weight:700;animation:pv-fade 0.4s ease 1.6s both;opacity:0">ν</span>
+                  </div>
+                </div>
+                <!-- API code side -->
+                <div class="pv-col" style="gap:8px">
+                  <i class="fa fa-code pv-icon" style="animation:pv-float 3s ease-in-out infinite"></i>
+                  <div class="pv-label">C# / ASP.NET<br>RESTful API</div>
+                  <div style="background:#fff;border:1.5px solid var(--blue-light);border-radius:6px;padding:4px 8px;font-size:0.62rem;color:var(--blue-dark);font-family:monospace;animation:pv-slide-r 0.5s ease 0.5s both;opacity:0">
+                    GET /price?K=150<br>POST /greeks
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="project-card-footer">
+              <a href="https://github.com/MadisonMLi" target="_blank">
+                <i class="fa fa-github"></i>&nbsp; View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 – Stock Return Pipeline -->
+        <div class="col s12 m6 l4" style="margin-bottom:24px;">
+          <div class="project-card">
+            <div class="project-card-header">
+              <h5>Stock Return ML Pipeline</h5>
+              <span class="p-tag">LightGBM</span>
+              <span class="p-tag">MLflow</span>
+              <span class="p-tag">FastAPI</span>
+              <span class="p-tag">Docker</span>
+            </div>
+            <div class="project-card-body" style="padding:0">
+              <div class="proj-visual" style="flex-direction:column;gap:10px">
+                <!-- Pipeline stages -->
+                <div style="display:flex;align-items:center;gap:5px">
+                  <div class="pv-stage" style="animation-delay:0.0s"><i class="fa fa-database"></i><span>Data</span></div>
+                  <i class="fa fa-arrow-right" style="font-size:0.65rem;color:var(--blue-light)"></i>
+                  <div class="pv-stage" style="animation-delay:0.2s"><i class="fa fa-cogs"></i><span>Features</span></div>
+                  <i class="fa fa-arrow-right" style="font-size:0.65rem;color:var(--blue-light)"></i>
+                  <div class="pv-stage" style="animation-delay:0.4s"><i class="fa fa-bolt"></i><span>Model</span></div>
+                  <i class="fa fa-arrow-right" style="font-size:0.65rem;color:var(--blue-light)"></i>
+                  <div class="pv-stage" style="animation-delay:0.6s"><i class="fa fa-plug"></i><span>API</span></div>
+                </div>
+                <!-- Trend line SVG -->
+                <svg viewBox="0 0 160 46" width="160" height="46">
+                  <polyline points="8,40 32,33 62,24 92,16 122,9 148,4"
+                            stroke="var(--blue-mid)" stroke-width="2.5" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            stroke-dasharray="200" stroke-dashoffset="200"
+                            style="animation:pv-draw 1.2s ease 0.7s forwards"/>
+                  <circle cx="148" cy="4" r="4" fill="var(--blue-dark)"
+                          style="animation:pv-fade 0.3s ease 1.9s both;opacity:0"/>
+                </svg>
+                <div class="pv-label">LightGBM · MLflow · Docker · GitHub Actions CI/CD</div>
+              </div>
+            </div>
+            <div class="project-card-footer">
+              <a href="https://github.com/MadisonMLi" target="_blank">
+                <i class="fa fa-github"></i>&nbsp; View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 – More -->
+        <div class="col s12 m6 l4" style="margin-bottom:24px;">
+          <div class="project-card">
+            <div class="project-card-header">
+              <h5>More on GitHub</h5>
+              <span class="p-tag">SEC RAG</span>
+              <span class="p-tag">Portfolio Opt.</span>
+              <span class="p-tag">Loan Default</span>
+            </div>
+            <div class="project-card-body" style="padding:0">
+              <div class="proj-visual" style="flex-direction:column;gap:12px">
+                <i class="fa fa-github" style="font-size:2.8rem;color:var(--blue-dark);animation:pv-float 3s ease-in-out infinite"></i>
+                <div class="pv-label" style="font-size:0.75rem;max-width:180px;line-height:1.6;">
+                  Additional projects available on my GitHub profile.
+                </div>
+              </div>
+            </div>
+            <div class="project-card-footer">
+              <a href="https://github.com/MadisonMLi" target="_blank">
+                <i class="fa fa-github"></i>&nbsp; See All Projects
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SKILLS ── -->
+  <section id="skills" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Skills</h2>
+      <div class="section-divider"></div>
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="skill-card">
+            <h5><i class="fa fa-code"></i>&nbsp; Programming Languages</h5>
+            <span class="s-tag">Python</span>
+            <span class="s-tag">R</span>
+            <span class="s-tag">SQL</span>
+            <span class="s-tag">C#</span>
+            <span class="s-tag">JavaScript</span>
+          </div>
+          <div class="skill-card">
+            <h5><i class="fa fa-brain"></i>&nbsp; ML / AI Frameworks</h5>
+            <span class="s-tag">TensorFlow</span>
+            <span class="s-tag">PyTorch</span>
+            <span class="s-tag">Scikit-learn</span>
+            <span class="s-tag">LightGBM</span>
+            <span class="s-tag">XGBoost</span>
+            <span class="s-tag">Random Forest</span>
+          </div>
+          <div class="skill-card">
+            <h5><i class="fa fa-comments"></i>&nbsp; LLMs &amp; GenAI</h5>
+            <span class="s-tag">Anthropic Claude</span>
+            <span class="s-tag">LangChain</span>
+            <span class="s-tag">FAISS</span>
+            <span class="s-tag">BM25 / RAG</span>
+            <span class="s-tag">Sentence Transformers</span>
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <div class="skill-card">
+            <h5><i class="fa fa-bar-chart"></i>&nbsp; Data &amp; Visualization</h5>
+            <span class="s-tag">PostgreSQL</span>
+            <span class="s-tag">Tableau</span>
+            <span class="s-tag">Plotly / Dash</span>
+            <span class="s-tag">Pandas</span>
+            <span class="s-tag">NumPy</span>
+          </div>
+          <div class="skill-card">
+            <h5><i class="fa fa-globe"></i>&nbsp; Development Tools &amp; Frameworks</h5>
+            <span class="s-tag">Git</span>
+            <span class="s-tag">Visual Studio</span>
+            <span class="s-tag">.NET Core / ASP.NET</span>
+            <span class="s-tag">FastAPI</span>
+            <span class="s-tag">Streamlit</span>
+            <span class="s-tag">Docker</span>
+            <span class="s-tag">MLflow</span>
+          </div>
+          <div class="skill-card">
+            <h5><i class="fa fa-line-chart"></i>&nbsp; Statistical &amp; Finance</h5>
+            <span class="s-tag">Monte Carlo / CVaR</span>
+            <span class="s-tag">Linear / Logistic Regression</span>
+            <span class="s-tag">Clustering / KNN</span>
+            <span class="s-tag">SAP</span>
+            <span class="s-tag">Forecasting</span>
+            <span class="s-tag">Risk Analysis</span>
+            <span class="s-tag">Regulatory Compliance</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── EDUCATION ── -->
+  <section id="education" class="section">
+    <div class="container">
+      <h2 class="section-title">Education</h2>
+      <div class="section-divider"></div>
+
+      <div class="edu-card">
+        <h5>MS, Computer Engineering – Human Robot Interaction</h5>
+        <p class="school"><i class="fa fa-university"></i>&nbsp; Tufts University</p>
+        <p class="date"><i class="fa fa-map-marker"></i>&nbsp; Medford, MA &nbsp;·&nbsp; Expected Dec 2026</p>
+        <p>
+          Focused on human-robot interaction design, embedded systems, sensor fusion,
+          and applied AI in robotic contexts. Builds on a foundation of software engineering
+          and machine learning to design intelligent, user-centred systems.
+        </p>
+      </div>
+
+      <div class="edu-card">
+        <h5>MS, Financial Mathematics</h5>
+        <p class="school"><i class="fa fa-university"></i>&nbsp; University of Minnesota – Twin Cities</p>
+        <p class="date"><i class="fa fa-map-marker"></i>&nbsp; Minneapolis, MN &nbsp;·&nbsp; May 2024</p>
+        <p>
+          Quantitative finance, stochastic calculus, Monte Carlo simulation, CVaR,
+          portfolio optimisation, and statistical modelling for financial applications.
+        </p>
+      </div>
+
+      <div class="edu-card">
+        <h5>BS, Management Information Systems &nbsp;·&nbsp; Minor in Finance</h5>
+        <p class="school"><i class="fa fa-university"></i>&nbsp; University of Minnesota – Twin Cities</p>
+        <p class="date"><i class="fa fa-map-marker"></i>&nbsp; Minneapolis, MN &nbsp;·&nbsp; Dec 2018 &nbsp;·&nbsp; Dean's List 2016–2018</p>
+        <p>
+          Data management, systems analysis, business analytics, information architecture,
+          and API design — with a finance minor covering valuation, risk, and capital markets.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <div class="divider-light"></div>
+      <div class="row">
+        <div class="col s12 m3">
+          <div class="contact-item">
+            <i class="fa fa-envelope"></i>
+            <a href="mailto:mengyao.li.oh@gmail.com">mengyao.li.oh@gmail.com</a>
+          </div>
+        </div>
+        <div class="col s12 m3">
+          <div class="contact-item">
+            <i class="fa fa-phone"></i>
+            <a href="tel:6124228529">612-422-8529</a>
+          </div>
+        </div>
+        <div class="col s12 m3">
+          <div class="contact-item">
+            <i class="fa fa-github"></i>
+            <a href="https://github.com/MadisonMLi" target="_blank">github.com/MadisonMLi</a>
+          </div>
+        </div>
+        <div class="col s12 m3">
+          <div class="contact-item">
+            <i class="fa fa-map-marker"></i>
+            <span>Watertown, MA 02472</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer style="margin-left:240px;">
+  Made with <span>♥</span> by Madison Mai &nbsp;·&nbsp; 2025
+</footer>
+
+<!-- ── SCRIPTS ── -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+<script>
+$(document).ready(function () {
+  $('.button-collapse').sideNav();
+
+  new Typed('#typed', {
+    strings: [
+      'Data Scientist',
+      'ML Engineer',
+      'GenAI Developer',
+      'RAG Architect',
+      'Senior Financial Analyst'
+    ],
+    typeSpeed: 60,
+    backSpeed: 40,
+    backDelay: 1800,
+    loop: true
+  });
+
+  $('a[href^="#"]').on('click', function (e) {
+    var target = $(this.getAttribute('href'));
+    if (target.length) {
+      e.preventDefault();
+      $('html, body').animate({ scrollTop: target.offset().top - 56 }, 600, 'swing');
+    }
+  });
+
+  function adjustLayout() {
+    if ($(window).width() < 993) {
+      $('.main-content').css('margin-left', '0');
+      $('footer').css('margin-left', '0');
+    } else {
+      $('.main-content').css('margin-left', '240px');
+      $('footer').css('margin-left', '240px');
+    }
+  }
+  adjustLayout();
+  $(window).on('resize', adjustLayout);
+});
+</script>
+</body>
+</html>
